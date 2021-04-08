@@ -59,16 +59,15 @@ void loop(void) {
   uint32_t now = millis();
   if (now > 1000) {
     pwms_on();
-    LL_GPIO_SetOutputPin(SERVO_GPIO_Port, SERVO_Pin);
 
     // switch pos and back to hide pos as fast as possible
     delay(servo_pos(SWITCH_POS));
-    delay(servo_pos(HIDE_POS));
-
-    LL_GPIO_ResetOutputPin(SERVO_GPIO_Port, SERVO_Pin);
-    pwms_off();
 
     LL_GPIO_ResetOutputPin(LED_GPIO_Port, LED_Pin);
+
+    delay(servo_pos(HIDE_POS));
+
+    pwms_off();
 
     print("Uptime", now, ": ");
     print_str("Sleeping\n");
